@@ -1,7 +1,7 @@
 """
 Temporal Fluency Analyzer – Streamlit App
 Analyzes speech rate, articulation rate, pause behavior, MLR,
-and phonation ratio from student audio recordings using Praat
+and phonation ratio from audio recordings using Praat
 (via praat-parselmouth).
 """
 
@@ -413,7 +413,7 @@ def main():
     st.title("🎙️ Temporal Fluency Analyzer")
     st.markdown(
         "Analyze **speech rate**, **articulation rate**, **pause behavior**, "
-        "**MLR**, and **phonation ratio** from student audio recordings."
+        "**MLR**, and **phonation ratio** from audio recordings."
     )
     st.divider()
 
