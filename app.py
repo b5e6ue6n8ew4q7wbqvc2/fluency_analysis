@@ -256,12 +256,12 @@ def show_metrics(result: dict):
         st.metric("🗣 Syllables",       result["Syllables"])
         st.metric("⏸ Pauses",          result["Pauses"])
     with col2:
-        st.metric("📈 Speech Rate",        f"{result['Speech Rate (syll/s)']} syll/s")
+        st.metric("📈 Speech Rate (Native = 3.3+)",        f"{result['Speech Rate (syll/s)']} syll/s")
         st.metric("⚡ Articulation Rate",  f"{result['Articulation Rate (syll/s)']} syll/s")
-        st.metric("📏 MLR",                result["MLR"])
+        st.metric("📏 MLR (Native = 7+)",                result["MLR"])
     with col3:
         st.metric("🎙 Phonation Time",  f"{result['Phonation Time (s)']} s")
-        st.metric("📊 Phonation Ratio", f"{result['Phonation Ratio']:.1%}")
+        st.metric("📊 Phonation Ratio (higher is better)", f"{result['Phonation Ratio']:.1%}")
         st.metric("🔤 Mean Syll. Dur.", f"{result['Mean Syllable Duration (s)']} s")
 
 
