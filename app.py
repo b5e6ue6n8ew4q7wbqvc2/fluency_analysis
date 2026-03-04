@@ -173,35 +173,42 @@ def analyze_audio(
 # ── File helpers ───────────────────────────────────────────────────────────────
 def save_upload(uploaded_file) -> str:
     """
-    Write an UploadedFile to a named temp file and return its path.
+    Write an UploadedFile into a temp directory using its original filename.
     Non-WAV files are converted to WAV via pydub when ffmpeg is available.
-    The caller is responsible for deleting the returned path.
+    The caller is responsible for cleanup via cleanup().
     """
+    tmp_dir   = tempfile.mkdtemp()
+    file_path = os.path.join(tmp_dir, uploaded_file.name)
+
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
     suffix = os.path.splitext(uploaded_file.name)[1].lower()
-
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        tmp.write(uploaded_file.getbuffer())
-        original_path = tmp.name
-
     if suffix != ".wav":
         try:
             from pydub import AudioSegment
-            audio    = AudioSegment.from_file(original_path)
-            wav_path = original_path[: -len(suffix)] + ".wav"
+            audio    = AudioSegment.from_file(file_path)
+            wav_path = os.path.join(
+                tmp_dir,
+                os.path.splitext(uploaded_file.name)[0] + ".wav"
+            )
             audio.export(wav_path, format="wav")
-            os.unlink(original_path)
+            os.unlink(file_path)
             return wav_path
         except Exception:
-            pass  # Let parselmouth attempt native reading
+            pass
 
-    return original_path
+    return file_path
 
 
 def cleanup(path: str):
-    """Silently remove a temp file."""
+    """Silently remove a temp file and its parent temp directory."""
     try:
         if path and os.path.exists(path):
             os.unlink(path)
+        parent = os.path.dirname(path)
+        if parent and os.path.isdir(parent):
+            os.rmdir(parent)   # only succeeds if empty, which it will be
     except OSError:
         pass
 
