@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Audio files – keep out of the repo
+*.wav
+*.mp3
+*.ogg
+*.aiff
+*.aifc
+*.au
+*.flac
+*.nist
+
+# Legacy script folders
+test_voices/
+results/
+weekly_users.csv
