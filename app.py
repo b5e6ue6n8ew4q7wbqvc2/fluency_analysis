@@ -46,6 +46,7 @@ def analyze_audio(
     silence_db: float = -25.0,
     min_dip:    float = 2.0,
     min_pause:  float = 0.3,
+    display_name: str   = None,       # ← add this
 ) -> dict:
     """
     Praat-based temporal fluency analysis.
@@ -283,7 +284,7 @@ def single_file_ui(silence_db: float, min_dip: float, min_pause: float):
         with st.spinner(f"Analyzing **{uploaded.name}** …"):
             try:
                 tmp    = save_upload(uploaded)
-                result = analyze_audio(tmp, assignment, silence_db, min_dip, min_pause)
+                result = analyze_audio(tmp, assignment, silence_db, min_dip, min_pause,display_name=uploaded.name,)
                 st.session_state["single_result"] = result
             except Exception as exc:
                 st.error(f"❌ Analysis failed: {exc}")
@@ -347,7 +348,7 @@ def batch_ui(silence_db: float, min_dip: float, min_pause: float):
             try:
                 tmp = save_upload(uf)
                 results.append(
-                    analyze_audio(tmp, assignment, silence_db, min_dip, min_pause)
+                    analyze_audio(tmp, assignment, silence_db, min_dip, min_pause,display_name=uf.name,)
                 )
             except Exception as exc:
                 errors.append((uf.name, str(exc)))
