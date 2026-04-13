@@ -421,7 +421,7 @@ def main():
     st.title("🎙️ Temporal Fluency Analyzer")
     st.markdown(
         "Analyze **speech rate**, **articulation rate**, **pause behavior**, "
-        "**MLR**, and **phonation ratio** from audio recordings using Praat (via praat-parselmouth)."
+        "**MLR**, and **phonation ratio** from audio recordings using Praat (via [praat-parselmouth](https://parselmouth.readthedocs.io/))."
     )
     st.divider()
 
