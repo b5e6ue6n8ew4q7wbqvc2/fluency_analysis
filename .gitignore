@@ -2,36 +2,36 @@
 __pycache__/
 *.py[cod]
 *.pyo
-*.egg
-*.egg-info/
-dist/
-build/
+*.pyd
 
 # Virtual environments
 .venv/
 venv/
 env/
+
+# Environment / secrets
 .env
+*.env
+api.env
 
-# Streamlit
-.streamlit/secrets.toml
-
-# OS
-.DS_Store
-Thumbs.db
-*.swp
-
-# Audio files – keep out of the repo
-*.wav
+# Audio / large data files
 *.mp3
-*.ogg
-*.aiff
-*.aifc
-*.au
+*.wav
+*.m4a
+*.mp4
 *.flac
-*.nist
+*.ogg
 
-# Legacy script folders
-test_voices/
-results/
-weekly_users.csv
+# Data files
+*.csv
+*.xlsx
+*.xls
+
+# OS artifacts
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
